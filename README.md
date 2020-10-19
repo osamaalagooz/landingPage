@@ -13,3 +13,6 @@ This a landing page project that can be a home page for any amazing web site.
 - Dynamic nav bar activation state
 - Dynamic Sections activation state
 - Applied the scroll effect.
+
+### The Style Guide.
+[Udacity style guide](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html) 
