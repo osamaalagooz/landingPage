@@ -3,8 +3,13 @@
 ### Overview 
 This a landing page project that can be a home page for any amazing web site.
 
-> ### Languages Used
->
->> 1. Html
->> 2. CSS
->> 3. JS
+ ### the languages Used
+
+> 1. Html
+> 2. CSS
+> 3. JS
+
+### The Functionalities
+- Dynamic nav bar activation state
+- Dynamic Sections activation state
+- Applied the scroll effect.
