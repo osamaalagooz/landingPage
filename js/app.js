@@ -38,61 +38,58 @@ let sections = document.querySelectorAll('section');
 
 // build the nav
 
-let navbulder = () => {
-    navContent = ''
-    sections.forEach((section) => {
-        id = section.id;
-        name = section.dataset.nav;
-        navContent += `<li><a id = "${id}_link" class = "menu__link" href="#${id}">${name}</a></li>` ;
-        
-    }  
-    )
-    nav.innerHTML = navContent;
-}
-navbulder();
+
+navContent = ''
+sections.forEach((section) => {
+    id = section.id;
+    name = section.dataset.nav;
+    navContent += `<li><a id = "${id}_link" class = "menu__link" href="#${id}">${name}</a></li>` ;
+    
+}  
+)
+nav.innerHTML = navContent;
+
+// navGenerator();
 
 
 
 
 // Add class 'active' to section when near top of viewport
-const offsetTop = (section) => {
-    return Math.floor(section.getBoundingClientRect().top);
-};
 
-// remove the active class
-const removeActive = (section) => {
+// remove the active class from the section
+const sectionDeactivate = (section) => {
     section.classList.remove('your-active-class');
-    section.style.cssText = "background-color: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%)";
+    
 
     // remove the active class from the anchor element.
     let selector = `#${section.id}_link`;
     let link = document.querySelector(selector);
     link.classList.remove('active');
 };
-// adding the active class
-const addActive = (conditional, section) => {
-    if(conditional){
-        section.classList.add('your-active-class');
+// add the active class to the section
+const sectionActivate = (section) => {
+    
+        section.classList.toggle('your-active-class');
         
         // add the active class to the anchor element.
         let selector = `#${section.id}_link`;
         let link = document.querySelector(selector);
         link.classList.add('active');
-    };
+    
 };
 // activate the section that on the viewport
-const sectionActivation = () => {
+const addTheActiveClass = () => {
+    
     sections.forEach(section => {
-        const elementOffset = offsetTop(section);
-
-        inviewport = () => elementOffset < 200 && elementOffset >= -400;
-
-        removeActive(section);
-        addActive(inviewport(),section);
+        const eleOffSetTop = section.getBoundingClientRect().top;
+        sectionDeactivate(section);
+        if (eleOffSetTop < .2 * section.scrollHeight && eleOffSetTop >= - 0.75 * section.scrollHeight) {
+            sectionActivate(section);
+        }
     });
 };
 
-window.addEventListener('scroll' ,sectionActivation);
+window.addEventListener('scroll' ,addTheActiveClass);
 
 // Scroll to anchor ID using scrollTO event
 
