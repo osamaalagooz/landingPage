@@ -19,8 +19,8 @@
 */
 
 const nav = document.getElementById('navbar__list');
-// get list of all the page sections.
-let sections = document.querySelectorAll('section');
+// get a list of all the page sections.
+let pageSections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -40,7 +40,7 @@ let sections = document.querySelectorAll('section');
 
 
 navContent = ''
-sections.forEach((section) => {
+pageSections.forEach((section) => {
     id = section.id;
     name = section.dataset.nav;
     navContent += `<li><a id = "${id}_link" class = "menu__link" href="#${id}">${name}</a></li>` ;
@@ -49,14 +49,14 @@ sections.forEach((section) => {
 )
 nav.innerHTML = navContent;
 
-// navGenerator();
+
 
 
 
 
 // Add class 'active' to section when near top of viewport
 
-// remove the active class from the section
+// remove the active class from the section and the navigator
 const sectionDeactivate = (section) => {
     section.classList.remove('your-active-class');
     
@@ -66,7 +66,7 @@ const sectionDeactivate = (section) => {
     let link = document.querySelector(selector);
     link.classList.remove('active');
 };
-// add the active class to the section
+// add the active class to the section and the navigator
 const sectionActivate = (section) => {
     
         section.classList.toggle('your-active-class');
@@ -80,7 +80,7 @@ const sectionActivate = (section) => {
 // activate the section that on the viewport
 const addTheActiveClass = () => {
     
-    sections.forEach(section => {
+    pageSections.forEach(section => {
         const eleOffSetTop = section.getBoundingClientRect().top;
         sectionDeactivate(section);
         if (eleOffSetTop < .2 * section.scrollHeight && eleOffSetTop >= - 0.75 * section.scrollHeight) {
@@ -92,8 +92,18 @@ const addTheActiveClass = () => {
 window.addEventListener('scroll' ,addTheActiveClass);
 
 // Scroll to anchor ID using scrollTO event
-
-
+scrollTOSection = (e) => {
+    if (e.target.nodeName === "A") {
+        e.preventDefault()
+        // get the section Id from it's anchor element Id (section1_link >> section1)
+        let str = e.target.id;
+        let sectionId = str.slice(0,8);
+        let clickedSection = document.getElementById(sectionId);
+        clickedSection.scrollIntoView();
+    }
+    
+} 
+nav.addEventListener('click', scrollTOSection);
 /**
  * End Main Functions
  * Begin Events
