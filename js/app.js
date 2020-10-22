@@ -39,15 +39,15 @@ let pageSections = document.querySelectorAll('section');
 // build the nav
 
 
-navContent = ''
+
 pageSections.forEach((section) => {
     id = section.id;
     name = section.dataset.nav;
-    navContent += `<li><a id = "${id}_link" class = "menu__link" href="#${id}">${name}</a></li>` ;
+    nav.innerHTML  += `<li><a id = "${id}_link" class = "menu__link" href="#${id}">${name}</a></li>` ;
     
 }  
 )
-nav.innerHTML = navContent;
+
 
 
 
@@ -99,7 +99,7 @@ scrollTOSection = (e) => {
         let str = e.target.id;
         let sectionId = str.slice(0,8);
         let clickedSection = document.getElementById(sectionId);
-        clickedSection.scrollIntoView();
+        clickedSection.scrollIntoView({behavior: "smooth"});
     }
     
 } 
